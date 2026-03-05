@@ -3,27 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuckySMP</title>
+
+<title>LuckySMP | Minecraft Server</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* FONT */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+/* RESET */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
 }
 
 /* BODY */
 
 body{
-background:#0d0d0d;
+font-family:Poppins;
+background:#050b1a;
 color:white;
 overflow-x:hidden;
+}
+
+/* ANIMATED BACKGROUND */
+
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(45deg,#020617,#071133,#0a1f55,#020617);
+background-size:400% 400%;
+animation:bgmove 18s infinite linear;
+z-index:-2;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* PARTICLES */
+
+.particle{
+position:fixed;
+width:3px;
+height:3px;
+background:#00d9ff;
+border-radius:50%;
+opacity:.5;
+animation:float 12s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh)}
 }
 
 /* INTRO SCREEN */
@@ -32,130 +69,153 @@ overflow-x:hidden;
 position:fixed;
 width:100%;
 height:100vh;
-background:#000;
+background:#020617;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 flex-direction:column;
-z-index:9999;
+z-index:999;
 }
 
-/* TEXT STYLE */
-
-.logo-text{
-font-size:80px;
-font-weight:700;
+.logo{
+font-family:Orbitron;
+font-size:90px;
+letter-spacing:8px;
 display:flex;
-gap:8px;
 }
 
-.logo-text span{
+.logo span{
 display:inline-block;
-animation:bounce 1.2s infinite;
+animation:bounce 1s infinite alternate;
 }
 
-/* COLORFUL LETTERS */
+/* COLORFUL TEXT */
 
-.logo-text span:nth-child(1){color:#ff4d4d; animation-delay:0s;}
-.logo-text span:nth-child(2){color:#ff944d; animation-delay:0.1s;}
-.logo-text span:nth-child(3){color:#ffd24d; animation-delay:0.2s;}
-.logo-text span:nth-child(4){color:#4dff88; animation-delay:0.3s;}
-.logo-text span:nth-child(5){color:#4dd2ff; animation-delay:0.4s;}
-
-.logo-text span:nth-child(6){width:30px;}
-
-.logo-text span:nth-child(7){color:#ff4df0; animation-delay:0.5s;}
-.logo-text span:nth-child(8){color:#7d4dff; animation-delay:0.6s;}
-.logo-text span:nth-child(9){color:#4dffda; animation-delay:0.7s;}
-
-/* BOUNCE */
+.logo span:nth-child(1){color:#00d9ff}
+.logo span:nth-child(2){color:#2af598}
+.logo span:nth-child(3){color:#8b5cf6}
+.logo span:nth-child(4){color:#22d3ee}
+.logo span:nth-child(5){color:#60a5fa}
+.logo span:nth-child(6){margin:0 20px}
+.logo span:nth-child(7){color:#22d3ee}
+.logo span:nth-child(8){color:#8b5cf6}
+.logo span:nth-child(9){color:#00d9ff}
 
 @keyframes bounce{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-30px)}
+0%{transform:translateY(0)}
+100%{transform:translateY(-35px)}
 }
 
-/* OPEN ANIMATION */
+/* INTRO EXIT */
 
 .hide{
-animation:openScreen 1.2s forwards;
+animation:open 1.5s forwards;
 }
 
-@keyframes openScreen{
-0%{transform:scaleY(1)}
-100%{transform:scaleY(0); transform-origin:top;}
-}
-
-/* MAIN WEBSITE */
-
-#main{
+@keyframes open{
+to{
+transform:translateY(-100%);
 opacity:0;
-animation:fadeIn 2s forwards;
+}
+}
+
+/* MAIN SITE */
+
+#site{
+opacity:0;
+animation:fadein 2s forwards;
 animation-delay:3s;
 }
 
-/* FADE IN */
-
-@keyframes fadeIn{
+@keyframes fadein{
 to{opacity:1}
 }
 
-/* HEADER */
+/* NAVBAR */
 
-header{
-padding:30px;
-font-size:40px;
-font-weight:bold;
-text-align:center;
-background:#111;
-border-bottom:1px solid #222;
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 10%;
+background:rgba(10,20,50,.5);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+nav h1{
+font-family:Orbitron;
+color:#00d9ff;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00d9ff;
 }
 
 /* HERO */
 
 .hero{
+height:80vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
-padding:120px 20px;
 }
 
-.hero h1{
-font-size:60px;
-margin-bottom:15px;
+.hero h2{
+font-size:65px;
+font-family:Orbitron;
+background:linear-gradient(90deg,#00d9ff,#60a5fa,#8b5cf6);
+-webkit-background-clip:text;
+color:transparent;
+animation:shine 6s infinite linear;
+}
+
+@keyframes shine{
+0%{background-position:0%}
+100%{background-position:200%}
 }
 
 .hero p{
-font-size:20px;
 opacity:.8;
+margin-top:10px;
+font-size:20px;
 }
 
 /* SERVER BOX */
 
 .server{
 margin-top:40px;
-display:inline-block;
 padding:20px 40px;
-background:#1a1a1a;
-border-radius:10px;
-border:1px solid #333;
+background:rgba(255,255,255,.05);
+border-radius:12px;
+border:1px solid rgba(255,255,255,.1);
 transition:.3s;
 }
 
 .server:hover{
-transform:scale(1.08);
-box-shadow:0 0 20px #00ffcc;
+transform:scale(1.1);
+box-shadow:0 0 30px #00d9ff;
 }
 
 /* BUTTON */
 
 .btn{
-display:inline-block;
 margin-top:30px;
-padding:12px 28px;
-background:#00ffcc;
-color:black;
-border-radius:6px;
-text-decoration:none;
+display:inline-block;
+padding:14px 35px;
+background:#00d9ff;
+color:#020617;
+border-radius:8px;
 font-weight:bold;
+text-decoration:none;
 transition:.3s;
 }
 
@@ -169,31 +229,38 @@ transform:scale(1.1);
 .gamemodes{
 display:flex;
 justify-content:center;
-gap:30px;
+gap:40px;
 flex-wrap:wrap;
-margin-top:80px;
-padding-bottom:100px;
+padding:80px 10%;
 }
 
 .card{
-background:#141414;
-padding:30px;
-width:220px;
-border-radius:10px;
-border:1px solid #222;
-transition:.3s;
+background:rgba(255,255,255,.04);
+padding:35px;
+width:250px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,.1);
+transition:.4s;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 20px #00ffcc;
+transform:translateY(-12px) scale(1.05);
+box-shadow:0 0 25px #00d9ff;
 }
+
+.card h3{
+font-family:Orbitron;
+margin-bottom:10px;
+color:#00d9ff;
+}
+
+/* FOOTER */
 
 footer{
 text-align:center;
-padding:20px;
-background:#111;
-opacity:.6;
+padding:25px;
+background:#020617;
+opacity:.7;
 }
 
 </style>
@@ -201,11 +268,11 @@ opacity:.6;
 
 <body>
 
-<!-- INTRO ANIMATION -->
+<!-- INTRO -->
 
 <div id="intro">
 
-<div class="logo-text">
+<div class="logo">
 <span>L</span>
 <span>U</span>
 <span>C</span>
@@ -219,24 +286,31 @@ opacity:.6;
 
 </div>
 
-<!-- MAIN WEBSITE -->
+<!-- SITE -->
 
-<div id="main">
+<div id="site">
 
-<header>LuckySMP</header>
+<nav>
+<h1>LuckySMP</h1>
+
+<div>
+<a href="#">Home</a>
+<a href="#">Store</a>
+<a href="#">Discord</a>
+</div>
+</nav>
 
 <section class="hero">
 
-<h1>Welcome to LuckySMP</h1>
+<h2>LuckySMP Network</h2>
+
 <p>The Ultimate Minecraft Survival Experience</p>
 
 <div class="server">
 Server IP: <b>play.luckysmp.net</b>
 </div>
 
-<br>
-
-<a href="#" class="btn">Join Discord</a>
+<a class="btn" href="#">Join Discord</a>
 
 </section>
 
@@ -244,34 +318,49 @@ Server IP: <b>play.luckysmp.net</b>
 
 <div class="card">
 <h3>Survival</h3>
-<p>Classic survival with economy and custom features.</p>
+<p>Classic survival with economy, land claims and custom features.</p>
 </div>
 
 <div class="card">
 <h3>Lifesteal</h3>
-<p>Kill players and steal their hearts.</p>
+<p>Kill players and steal hearts to become the strongest.</p>
 </div>
 
 <div class="card">
 <h3>Events</h3>
-<p>Weekly events with exciting rewards.</p>
+<p>Weekly PvP events, tournaments and amazing rewards.</p>
 </div>
 
 </section>
 
 <footer>
-© 2026 LuckySMP
+© 2026 LuckySMP Minecraft Server
 </footer>
 
 </div>
 
 <script>
 
-/* REMOVE INTRO AFTER 3s */
+/* INTRO REMOVE */
 
 setTimeout(()=>{
 document.getElementById("intro").classList.add("hide");
 },2500);
+
+/* PARTICLES */
+
+for(let i=0;i<60;i++){
+
+let p=document.createElement("div");
+p.classList.add("particle");
+
+p.style.left=Math.random()*100+"vw";
+p.style.top=Math.random()*100+"vh";
+p.style.animationDuration=(Math.random()*10+8)+"s";
+
+document.body.appendChild(p);
+
+}
 
 </script>
 
