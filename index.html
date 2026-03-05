@@ -3,68 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuckySMP | Minecraft Server</title>
+<title>LuckySMP</title>
 
 <style>
 
-/* GOOGLE FONT */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+/* FONT */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Orbitron',sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
-/* BACKGROUND */
+/* BODY */
 
 body{
-height:100vh;
-background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#141e30);
-background-size:400% 400%;
-animation:gradientBG 12s ease infinite;
+background:#0d0d0d;
 color:white;
-text-align:center;
 overflow-x:hidden;
 }
 
-@keyframes gradientBG{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+/* INTRO SCREEN */
+
+#intro{
+position:fixed;
+width:100%;
+height:100vh;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+/* TEXT STYLE */
+
+.logo-text{
+font-size:80px;
+font-weight:700;
+display:flex;
+gap:8px;
+}
+
+.logo-text span{
+display:inline-block;
+animation:bounce 1.2s infinite;
+}
+
+/* COLORFUL LETTERS */
+
+.logo-text span:nth-child(1){color:#ff4d4d; animation-delay:0s;}
+.logo-text span:nth-child(2){color:#ff944d; animation-delay:0.1s;}
+.logo-text span:nth-child(3){color:#ffd24d; animation-delay:0.2s;}
+.logo-text span:nth-child(4){color:#4dff88; animation-delay:0.3s;}
+.logo-text span:nth-child(5){color:#4dd2ff; animation-delay:0.4s;}
+
+.logo-text span:nth-child(6){width:30px;}
+
+.logo-text span:nth-child(7){color:#ff4df0; animation-delay:0.5s;}
+.logo-text span:nth-child(8){color:#7d4dff; animation-delay:0.6s;}
+.logo-text span:nth-child(9){color:#4dffda; animation-delay:0.7s;}
+
+/* BOUNCE */
+
+@keyframes bounce{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-30px)}
+}
+
+/* OPEN ANIMATION */
+
+.hide{
+animation:openScreen 1.2s forwards;
+}
+
+@keyframes openScreen{
+0%{transform:scaleY(1)}
+100%{transform:scaleY(0); transform-origin:top;}
+}
+
+/* MAIN WEBSITE */
+
+#main{
+opacity:0;
+animation:fadeIn 2s forwards;
+animation-delay:3s;
+}
+
+/* FADE IN */
+
+@keyframes fadeIn{
+to{opacity:1}
 }
 
 /* HEADER */
 
 header{
-padding:40px;
-font-size:45px;
-font-weight:600;
-letter-spacing:2px;
-animation:fadeDown 1.5s;
-}
-
-@keyframes fadeDown{
-from{opacity:0; transform:translateY(-40px)}
-to{opacity:1; transform:translateY(0)}
+padding:30px;
+font-size:40px;
+font-weight:bold;
+text-align:center;
+background:#111;
+border-bottom:1px solid #222;
 }
 
 /* HERO */
 
 .hero{
-margin-top:40px;
-animation:fadeUp 2s;
-}
-
-@keyframes fadeUp{
-from{opacity:0; transform:translateY(40px)}
-to{opacity:1; transform:translateY(0)}
+text-align:center;
+padding:120px 20px;
 }
 
 .hero h1{
 font-size:60px;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
 .hero p{
@@ -72,105 +128,72 @@ font-size:20px;
 opacity:.8;
 }
 
-/* SERVER IP BOX */
+/* SERVER BOX */
 
-.server-box{
-margin:40px auto;
+.server{
+margin-top:40px;
+display:inline-block;
 padding:20px 40px;
-background:rgba(255,255,255,0.05);
-border-radius:12px;
-width:320px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(0,0,0,.4);
-transition:0.3s;
+background:#1a1a1a;
+border-radius:10px;
+border:1px solid #333;
+transition:.3s;
 }
 
-.server-box:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px rgba(0,255,200,.6);
+.server:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px #00ffcc;
 }
 
 /* BUTTON */
 
 .btn{
 display:inline-block;
-margin-top:25px;
-padding:12px 30px;
-background:#00ffa6;
-color:#000;
-font-weight:bold;
-border-radius:8px;
+margin-top:30px;
+padding:12px 28px;
+background:#00ffcc;
+color:black;
+border-radius:6px;
 text-decoration:none;
-transition:0.3s;
+font-weight:bold;
+transition:.3s;
 }
 
 .btn:hover{
 background:white;
 transform:scale(1.1);
-box-shadow:0 0 20px #00ffa6;
 }
 
 /* GAMEMODES */
 
 .gamemodes{
-margin-top:80px;
 display:flex;
 justify-content:center;
-gap:40px;
+gap:30px;
 flex-wrap:wrap;
+margin-top:80px;
+padding-bottom:100px;
 }
 
 .card{
-background:rgba(255,255,255,0.05);
+background:#141414;
 padding:30px;
-border-radius:12px;
 width:220px;
+border-radius:10px;
+border:1px solid #222;
 transition:.3s;
-backdrop-filter:blur(6px);
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.05);
-box-shadow:0 0 20px rgba(0,255,170,.7);
+transform:translateY(-10px);
+box-shadow:0 0 20px #00ffcc;
 }
-
-.card h3{
-margin-bottom:10px;
-}
-
-/* FOOTER */
 
 footer{
-margin-top:100px;
+text-align:center;
 padding:20px;
+background:#111;
 opacity:.6;
-font-size:14px;
-}
-
-/* PARTICLES */
-
-.particle{
-position:absolute;
-width:4px;
-height:4px;
-background:white;
-border-radius:50%;
-opacity:.6;
-animation:float 10s linear infinite;
-}
-
-@keyframes float{
-0%{
-transform:translateY(0px);
-opacity:0;
-}
-50%{
-opacity:1;
-}
-100%{
-transform:translateY(-1000px);
-opacity:0;
-}
 }
 
 </style>
@@ -178,18 +201,43 @@ opacity:0;
 
 <body>
 
+<!-- INTRO ANIMATION -->
+
+<div id="intro">
+
+<div class="logo-text">
+<span>L</span>
+<span>U</span>
+<span>C</span>
+<span>K</span>
+<span>Y</span>
+<span> </span>
+<span>S</span>
+<span>M</span>
+<span>P</span>
+</div>
+
+</div>
+
+<!-- MAIN WEBSITE -->
+
+<div id="main">
+
 <header>LuckySMP</header>
 
 <section class="hero">
+
 <h1>Welcome to LuckySMP</h1>
 <p>The Ultimate Minecraft Survival Experience</p>
 
-<div class="server-box">
-<p>Server IP</p>
-<h2>play.luckysmp.net</h2>
+<div class="server">
+Server IP: <b>play.luckysmp.net</b>
 </div>
 
-<a class="btn" href="#">Join Discord</a>
+<br>
+
+<a href="#" class="btn">Join Discord</a>
+
 </section>
 
 <section class="gamemodes">
@@ -201,36 +249,29 @@ opacity:0;
 
 <div class="card">
 <h3>Lifesteal</h3>
-<p>Kill players to steal their hearts and dominate the server.</p>
+<p>Kill players and steal their hearts.</p>
 </div>
 
 <div class="card">
 <h3>Events</h3>
-<p>Weekly PvP and community events with awesome rewards.</p>
+<p>Weekly events with exciting rewards.</p>
 </div>
 
 </section>
 
 <footer>
-© 2026 LuckySMP Minecraft Server
+© 2026 LuckySMP
 </footer>
+
+</div>
 
 <script>
 
-/* PARTICLE GENERATOR */
+/* REMOVE INTRO AFTER 3s */
 
-for(let i=0;i<40;i++){
-
-let particle=document.createElement("div");
-particle.classList.add("particle");
-
-particle.style.left=Math.random()*100+"vw";
-particle.style.animationDuration=(Math.random()*5+5)+"s";
-particle.style.opacity=Math.random();
-
-document.body.appendChild(particle);
-
-}
+setTimeout(()=>{
+document.getElementById("intro").classList.add("hide");
+},2500);
 
 </script>
 
