@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,42 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* POPUP */
 
-.popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-z-index:1000;
-}
+/* BODY */
 
-.popup-content{
-background:#0b142c;
-padding:40px;
-border-radius:12px;
-text-align:center;
-box-shadow:0 0 20px #00d9ff;
-}
-
-.qrimg{
-width:220px;
-margin-top:20px;
-}
-
-.close{
-position:absolute;
-top:20px;
-right:30px;
-font-size:30px;
-cursor:pointer;
-color:white;
-}
 body{
 font-family:Poppins;
 background:#050b1a;
@@ -105,7 +73,7 @@ padding:40px 10%;
 background:rgba(255,255,255,.05);
 padding:30px;
 border-radius:12px;
-width:250px;
+width:260px;
 text-align:center;
 border:1px solid rgba(255,255,255,.1);
 transition:.3s;
@@ -120,11 +88,25 @@ box-shadow:0 0 20px #00d9ff;
 font-family:Orbitron;
 }
 
+/* PERKS LIST */
+
+.perks{
+text-align:left;
+margin:10px 0;
+padding-left:20px;
+font-size:14px;
+line-height:1.6;
+}
+
+/* PRICE */
+
 .price{
 color:#00d9ff;
 font-size:20px;
 margin:10px 0;
 }
+
+/* BUY BUTTON */
 
 .buy{
 display:inline-block;
@@ -134,10 +116,49 @@ color:#020617;
 border-radius:6px;
 text-decoration:none;
 font-weight:bold;
+cursor:pointer;
 }
 
 .buy:hover{
 background:white;
+}
+
+/* POPUP */
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.popup-content{
+background:#0b142c;
+padding:40px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 0 20px #00d9ff;
+position:relative;
+}
+
+.qrimg{
+width:220px;
+margin-top:20px;
+}
+
+.close{
+position:absolute;
+top:10px;
+right:15px;
+font-size:28px;
+cursor:pointer;
+color:white;
 }
 
 </style>
@@ -156,7 +177,7 @@ background:white;
 
 <h1>LuckySMP Store</h1>
 
-<!-- RANKS CATEGORY -->
+<!-- RANKS -->
 
 <h2 class="category-title">Ranks</h2>
 
@@ -164,109 +185,134 @@ background:white;
 
 <div class="item">
 <h3>VIP Rank</h3>
-<p>3x Homes
-2 Concurrent Auctions
-/craft Command
-/recipe Command</p>
+<ul class="perks">
+<li>3x Homes</li>
+<li>2 Concurrent Auctions</li>
+<li>/craft Command</li>
+<li>/recipe Command</li>
+</ul>
 <div class="price">₹20</div>
-<a class="buy" onclick="openQR()">Buy</a>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 <div class="item">
 <h3>MVP Rank</h3>
-<p>5x Homes
-4 Concurrent Auctions
-/craft Command
-/recipe Command
-/disposal Command
-/near Command
-/hat Command
-/feed Command</p>
+<ul class="perks">
+<li>5x Homes</li>
+<li>4 Concurrent Auctions</li>
+<li>/craft Command</li>
+<li>/recipe Command</li>
+<li>/disposal Command</li>
+<li>/near Command</li>
+<li>/hat Command</li>
+<li>/feed Command</li>
+</ul>
 <div class="price">₹30</div>
-<a class="buy" onclick="openQR()">Buy</a>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 <div class="item">
 <h3>ELITE Rank</h3>
-<p>6x Homes
-5 Concurrent Auctions
-/craft Command
-/recipe Command
-/disposal Command
-/near Command
-/feed Command
-/inusee Command
-/enderchest Command</p>
+<ul class="perks">
+<li>6x Homes</li>
+<li>5 Concurrent Auctions</li>
+<li>/craft Command</li>
+<li>/recipe Command</li>
+<li>/disposal Command</li>
+<li>/near Command</li>
+<li>/feed Command</li>
+<li>/invsee Command</li>
+<li>/enderchest Command</li>
+</ul>
 <div class="price">₹40</div>
-<a class="buy" onclick="openQR()">Buy</a>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 <div class="item">
 <h3>IMMORTAL Rank</h3>
-<p>7x Homes
-6 Concurrent Auctions
-/craft Command
-/recipe Command
-/disposal Command
-/near Command
-/hat Command
-/invsee Command
-/enderchest Command
-/ptime Command
-/pweather Command</p>
+<ul class="perks">
+<li>7x Homes</li>
+<li>6 Concurrent Auctions</li>
+<li>/craft Command</li>
+<li>/recipe Command</li>
+<li>/disposal Command</li>
+<li>/near Command</li>
+<li>/hat Command</li>
+<li>/invsee Command</li>
+<li>/enderchest Command</li>
+<li>/ptime Command</li>
+<li>/pweather Command</li>
+</ul>
 <div class="price">₹50</div>
-<a class="buy" onclick="openQR()">Buy</a>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 <div class="item">
 <h3>DEADLIEST Rank</h3>
-<p>10x Homes
-8 Concurrent Auctions
-/craft Command
-/recipe Command
-/disposal Command
-/near Command
-/hat Command
-/feed Command
-/inusee Command
-/enderchest Command
-/ptime Command
-/pweather Command
-/heal Command</p>
+<ul class="perks">
+<li>10x Homes</li>
+<li>8 Concurrent Auctions</li>
+<li>/craft Command</li>
+<li>/recipe Command</li>
+<li>/disposal Command</li>
+<li>/near Command</li>
+<li>/hat Command</li>
+<li>/feed Command</li>
+<li>/invsee Command</li>
+<li>/enderchest Command</li>
+<li>/ptime Command</li>
+<li>/pweather Command</li>
+<li>/heal Command</li>
+</ul>
 <div class="price">₹60</div>
-<a class="buy" onclick="openQR()">Buy</a>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 </div>
 
-<!-- CRATE KEYS CATEGORY -->
+<!-- CRATE KEYS -->
 
 <h2 class="category-title">Crate Keys</h2>
 
 <div class="store">
 
 <div class="item">
-<h3>Vote Crate Key</h3>
-<p>Use in vote crates for small rewards.</p>
-<div class="price">$1</div>
-<a class="buy" href="#">Buy</a>
+<h3>Lucky Key</h3>
+<ul class="perks">
+<li>Special Lucky Crate Rewards</li>
+<li>Random Items</li>
+<li>Money & Rare Loot</li>
+</ul>
+<div class="price">₹20</div>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 <div class="item">
-<h3>Rare Crate Key</h3>
-<p>Chance to win rare items and money.</p>
-<div class="price">$3</div>
-<a class="buy" href="#">Buy</a>
+<h3>Spawner Key</h3>
+<ul class="perks">
+<li>Chance to Win Mob Spawners</li>
+<li>Rare Survival Items</li>
+<li>Bonus Rewards</li>
+</ul>
+<div class="price">₹30</div>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 <div class="item">
-<h3>Legendary Crate Key</h3>
-<p>Unlock powerful rewards.</p>
-<div class="price">$6</div>
-<a class="buy" href="#">Buy</a>
+<h3>Demon Key</h3>
+<ul class="perks">
+<li>Powerful Rare Rewards</li>
+<li>High Value Items</li>
+<li>Exclusive Loot</li>
+</ul>
+<div class="price">₹50</div>
+<div class="buy" onclick="openQR()">Buy</div>
 </div>
 
 </div>
+
+<!-- QR POPUP -->
+
 <div id="qrPopup" class="popup">
 <div class="popup-content">
 
@@ -278,6 +324,7 @@ background:white;
 
 </div>
 </div>
+
 <script>
 
 function openQR(){
@@ -289,6 +336,7 @@ document.getElementById("qrPopup").style.display="none";
 }
 
 </script>
+
 </body>
 </html>
 ```
