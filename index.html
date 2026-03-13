@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,12 +176,6 @@ font-family:Orbitron;
 background:linear-gradient(90deg,#00d9ff,#60a5fa,#8b5cf6);
 -webkit-background-clip:text;
 color:transparent;
-animation:shine 6s infinite linear;
-}
-
-@keyframes shine{
-0%{background-position:0%}
-100%{background-position:200%}
 }
 
 .hero p{
@@ -198,11 +193,21 @@ background:rgba(255,255,255,.05);
 border-radius:12px;
 border:1px solid rgba(255,255,255,.1);
 transition:.3s;
+cursor:pointer;
 }
 
 .server:hover{
 transform:scale(1.1);
 box-shadow:0 0 30px #00d9ff;
+}
+
+/* COPY TEXT */
+
+.copymsg{
+margin-top:10px;
+font-size:14px;
+color:#00d9ff;
+display:none;
 }
 
 /* BUTTON */
@@ -294,23 +299,25 @@ opacity:.7;
 <h1>LuckySMP</h1>
 
 <div>
-<a href="index.html">Home</a>
-<a href="store.html">Store</a>
-<a href="#">Discord</a>
+<a href="/">Home</a>
+<a href="/store">Store</a>
+<a href="https://discord.gg/ueadhWTNVW" target="_blank">Discord</a>
 </div>
 </nav>
 
 <section class="hero">
 
-<h2>LuckySMP Network</h2>
+<h2>Lucky SMP</h2>
 
 <p>The Ultimate Minecraft Survival Experience</p>
 
-<div class="server">
-Server IP: <b>play.luckysmp.net</b>
+<div class="server" onclick="copyIP()">
+Server IP: <b>play.luckysmp.dpdns.org</b>
 </div>
 
-<a class="btn" href="#">Join Discord</a>
+<div class="copymsg" id="copied">Copied to clipboard!</div>
+
+<a class="btn" href="https://discord.gg/ueadhWTNVW" target="_blank">Join Discord</a>
 
 </section>
 
@@ -319,11 +326,6 @@ Server IP: <b>play.luckysmp.net</b>
 <div class="card">
 <h3>Survival</h3>
 <p>Classic survival with economy, land claims and custom features.</p>
-</div>
-
-<div class="card">
-<h3>Lifesteal</h3>
-<p>Kill players and steal hearts to become the strongest.</p>
 </div>
 
 <div class="card">
@@ -347,6 +349,21 @@ setTimeout(()=>{
 document.getElementById("intro").classList.add("hide");
 },2500);
 
+/* COPY IP */
+
+function copyIP(){
+
+navigator.clipboard.writeText("play.luckysmp.dpdns.org");
+
+let msg=document.getElementById("copied");
+msg.style.display="block";
+
+setTimeout(()=>{
+msg.style.display="none";
+},2000);
+
+}
+
 /* PARTICLES */
 
 for(let i=0;i<60;i++){
@@ -366,3 +383,4 @@ document.body.appendChild(p);
 
 </body>
 </html>
+```
