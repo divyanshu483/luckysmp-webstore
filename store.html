@@ -1,362 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store | LuckySMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
 
-<title>LuckySMP Store</title>
+        .page-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+        .category-section {
+            padding: 40px 8%;
+        }
 
-<style>
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-/* RESET */
+        .category-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
 
-/* BODY */
+        .item-card {
+            display: flex;
+            flex-direction: column;
+            padding: 35px;
+            height: 100%;
+        }
 
-body{
-font-family:Poppins;
-background:#050b1a;
-color:white;
-overflow-x:hidden;
-}
+        .item-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
 
-/* NAVBAR (SAME AS INDEX) */
+        .perks-list {
+            list-style: none;
+            margin-bottom: 30px;
+            flex: 1;
+        }
 
-nav{
-display:flex;
-justify-content:space-between;
-padding:20px 10%;
-background:rgba(10,20,50,.5);
-backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,.1);
-}
+        .perks-list li {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
 
-nav h1{
-font-family:Orbitron;
-color:#00d9ff;
-}
+        .perks-list li::before {
+            content: '✦';
+            color: var(--accent);
+        }
 
-nav a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-transition:.3s;
-}
+        .price-tag {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
 
-nav a:hover{
-color:#00d9ff;
-}
+        .price-tag span {
+            font-size: 1rem;
+            color: var(--primary);
+            vertical-align: super;
+        }
 
-/* TITLE */
+        /* QR Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-h1.page-title{
-text-align:center;
-font-family:Orbitron;
-margin-top:40px;
-color:#00d9ff;
-}
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
 
-/* CATEGORY TITLE */
+        .modal-content {
+            background: #0b142c;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            border: 1px solid var(--primary);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 217, 255, 0.2);
+        }
 
-.category-title{
-text-align:center;
-font-family:Orbitron;
-margin-top:60px;
-font-size:30px;
-}
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: color 0.3s;
+        }
 
-/* STORE GRID */
+        .close-modal:hover { color: #fff; }
 
-.store{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:40px;
-padding:40px 10%;
-}
+        .qr-image {
+            width: 100%;
+            max-width: 250px;
+            margin: 25px auto;
+            padding: 15px;
+            background: #fff;
+            border-radius: 20px;
+        }
 
-/* ITEM CARD */
+        .modal h2 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+        }
 
-.item{
-background:rgba(255,255,255,.05);
-padding:30px;
-border-radius:12px;
-width:260px;
-text-align:center;
-border:1px solid rgba(255,255,255,.1);
-transition:.3s;
-}
-
-.item:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px #00d9ff;
-}
-
-.item h3{
-font-family:Orbitron;
-margin-bottom:10px;
-}
-
-/* PERKS LIST */
-
-.perks{
-text-align:left;
-margin:10px 0;
-padding-left:20px;
-font-size:14px;
-line-height:1.6;
-}
-
-/* PRICE */
-
-.price{
-color:#00d9ff;
-font-size:20px;
-margin:15px 0;
-}
-
-/* BUY BUTTON */
-
-.buy{
-display:inline-block;
-padding:10px 25px;
-background:#00d9ff;
-color:#020617;
-border-radius:6px;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
-}
-
-.buy:hover{
-background:white;
-}
-
-/* POPUP */
-
-.popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-z-index:1000;
-}
-
-.popup-content{
-background:#0b142c;
-padding:40px;
-border-radius:12px;
-text-align:center;
-box-shadow:0 0 20px #00d9ff;
-position:relative;
-}
-
-.qrimg{
-width:220px;
-margin-top:20px;
-}
-
-.close{
-position:absolute;
-top:10px;
-right:15px;
-font-size:30px;
-cursor:pointer;
-color:white;
-}
-
-</style>
+        .modal p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="bg-glow"></div>
 
-<!-- NAVBAR -->
+    <nav>
+        <h1>LuckySMP</h1>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="store.html">Store</a>
+            <a href="https://discord.gg/ueadhWTNVW" target="_blank">Discord</a>
+        </div>
+    </nav>
 
-<nav>
-<h1>LuckySMP</h1>
+    <header class="page-header">
+        <h2>Webstore</h2>
+        <p>Support the server and get amazing perks in return.</p>
+    </header>
 
-<div>
-<a href="/">Home</a>
-<a href="/store">Store</a>
-<a href="https://discord.gg/ueadhWTNVW" target="_blank">Discord</a>
-</div>
-</nav>
+    <section class="category-section">
+        <h2 class="category-title">Player Ranks</h2>
+        <div class="store-grid">
+            <!-- VIP -->
+            <div class="card item-card">
+                <h3>VIP</h3>
+                <ul class="perks-list">
+                    <li>3x Homes</li>
+                    <li>2 Concurrent Auctions</li>
+                    <li>Access to /craft</li>
+                    <li>Access to /recipe</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>20</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
 
-<h1 class="page-title">LuckySMP Store</h1>
+            <!-- MVP -->
+            <div class="card item-card">
+                <h3>MVP</h3>
+                <ul class="perks-list">
+                    <li>5x Homes</li>
+                    <li>4 Concurrent Auctions</li>
+                    <li>Access to /craft, /recipe</li>
+                    <li>Access to /disposal, /near</li>
+                    <li>Access to /hat, /feed</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>30</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
 
-<!-- RANKS -->
+            <!-- ELITE -->
+            <div class="card item-card">
+                <h3>ELITE</h3>
+                <ul class="perks-list">
+                    <li>6x Homes</li>
+                    <li>5 Concurrent Auctions</li>
+                    <li>All MVP Perks</li>
+                    <li>Access to /invsee</li>
+                    <li>Access to /enderchest</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>40</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
 
-<h2 class="category-title">Ranks</h2>
+            <!-- IMMORTAL -->
+            <div class="card item-card">
+                <h3>IMMORTAL</h3>
+                <ul class="perks-list">
+                    <li>7x Homes</li>
+                    <li>6 Concurrent Auctions</li>
+                    <li>All ELITE Perks</li>
+                    <li>Access to /ptime, /pweather</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>50</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
+        </div>
+    </section>
 
-<div class="store">
+    <section class="category-section">
+        <h2 class="category-title">Crate Keys</h2>
+        <div class="store-grid">
+            <div class="card item-card">
+                <h3>Lucky Key</h3>
+                <ul class="perks-list">
+                    <li>Lucky Crate Rewards</li>
+                    <li>Random Rare Items</li>
+                    <li>Economy Boosters</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>20</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
 
-<div class="item">
-<h3>VIP Rank</h3>
-<ul class="perks">
-<li>3x Homes</li>
-<li>2 Concurrent Auctions</li>
-<li>/craft Command</li>
-<li>/recipe Command</li>
-</ul>
-<div class="price">₹20</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
+            <div class="card item-card">
+                <h3>Spawner Key</h3>
+                <ul class="perks-list">
+                    <li>Chance to win Mob Spawners</li>
+                    <li>Rare Survival Blocks</li>
+                    <li>Bonus Loot</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>30</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
 
-<div class="item">
-<h3>MVP Rank</h3>
-<ul class="perks">
-<li>5x Homes</li>
-<li>4 Concurrent Auctions</li>
-<li>/craft Command</li>
-<li>/recipe Command</li>
-<li>/disposal Command</li>
-<li>/near Command</li>
-<li>/hat Command</li>
-<li>/feed Command</li>
-</ul>
-<div class="price">₹30</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
+            <div class="card item-card">
+                <h3>Demon Key</h3>
+                <ul class="perks-list">
+                    <li>God-tier Loot</li>
+                    <li>Exclusive Demon Gear</li>
+                    <li>Highest Reward Tiers</li>
+                </ul>
+                <div class="price-tag"><span>₹</span>50</div>
+                <button class="btn" onclick="openPayment()">Buy Now</button>
+            </div>
+        </div>
+    </section>
 
-<div class="item">
-<h3>ELITE Rank</h3>
-<ul class="perks">
-<li>6x Homes</li>
-<li>5 Concurrent Auctions</li>
-<li>/craft Command</li>
-<li>/recipe Command</li>
-<li>/disposal Command</li>
-<li>/near Command</li>
-<li>/feed Command</li>
-<li>/invsee Command</li>
-<li>/enderchest Command</li>
-</ul>
-<div class="price">₹40</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
+    <footer>
+        <p>&copy; 2026 LuckySMP Minecraft Server. All rights reserved.</p>
+    </footer>
 
-<div class="item">
-<h3>IMMORTAL Rank</h3>
-<ul class="perks">
-<li>7x Homes</li>
-<li>6 Concurrent Auctions</li>
-<li>/craft Command</li>
-<li>/recipe Command</li>
-<li>/disposal Command</li>
-<li>/near Command</li>
-<li>/hat Command</li>
-<li>/invsee Command</li>
-<li>/enderchest Command</li>
-<li>/ptime Command</li>
-<li>/pweather Command</li>
-</ul>
-<div class="price">₹50</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePayment()">&times;</span>
+            <h2>Complete Purchase</h2>
+            <p>Scan the QR code below to pay via UPI.</p>
+            <img src="qr.png" alt="Payment QR" class="qr-image">
+            <p style="margin-top: 15px; font-weight: 500;">IMPORTANT:</p>
+            <p>After payment, create a ticket on our Discord with the transaction screenshot to receive your items.</p>
+            <a href="https://discord.gg/ueadhWTNVW" target="_blank" class="btn" style="margin-top: 20px; width: 100%;">Join Discord</a>
+        </div>
+    </div>
 
-<div class="item">
-<h3>DEADLIEST Rank</h3>
-<ul class="perks">
-<li>10x Homes</li>
-<li>8 Concurrent Auctions</li>
-<li>/craft Command</li>
-<li>/recipe Command</li>
-<li>/disposal Command</li>
-<li>/near Command</li>
-<li>/hat Command</li>
-<li>/feed Command</li>
-<li>/invsee Command</li>
-<li>/enderchest Command</li>
-<li>/ptime Command</li>
-<li>/pweather Command</li>
-<li>/heal Command</li>
-</ul>
-<div class="price">₹60</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
+    <script src="script.js"></script>
+    <script>
+        function openPayment() {
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
 
-</div>
+        function closePayment() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
 
-<!-- CRATE KEYS -->
-
-<h2 class="category-title">Crate Keys</h2>
-
-<div class="store">
-
-<div class="item">
-<h3>Lucky Key</h3>
-<ul class="perks">
-<li>Lucky Crate Rewards</li>
-<li>Random Rare Items</li>
-<li>Money & Loot</li>
-</ul>
-<div class="price">₹20</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
-
-<div class="item">
-<h3>Spawner Key</h3>
-<ul class="perks">
-<li>Chance to Win Spawners</li>
-<li>Rare Survival Items</li>
-<li>Bonus Rewards</li>
-</ul>
-<div class="price">₹30</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
-
-<div class="item">
-<h3>Demon Key</h3>
-<ul class="perks">
-<li>Powerful Rare Rewards</li>
-<li>High Value Items</li>
-<li>Exclusive Loot</li>
-</ul>
-<div class="price">₹50</div>
-<div class="buy" onclick="openQR()">Buy</div>
-</div>
-
-</div>
-
-<!-- QR POPUP -->
-
-<div id="qrPopup" class="popup">
-<div class="popup-content">
-
-<span class="close" onclick="closeQR()">&times;</span>
-
-<h2>Scan to Pay</h2>
-<h4>Make a ticket on discord after payment is done</h4>
-
-<img src="qr.png" alt="Payment QR" class="qrimg">
-
-</div>
-</div>
-
-<script>
-
-function openQR(){
-document.getElementById("qrPopup").style.display="flex";
-}
-
-function closeQR(){
-document.getElementById("qrPopup").style.display="none";
-}
-
-</script>
-
+        // Close on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                closePayment();
+            }
+        }
+    </script>
 </body>
 </html>
-```

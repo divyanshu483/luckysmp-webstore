@@ -1,385 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckySMP | Ultimate Minecraft Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Intro Screen */
+        #intro {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: #020617;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 999;
+        }
 
-<title>LuckySMP | Minecraft Server</title>
+        .logo-container {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 10vw, 6rem);
+            letter-spacing: 8px;
+            display: flex;
+            gap: 10px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+        .logo-container span {
+            display: inline-block;
+            animation: bounce 1.2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
 
-<style>
+        /* Rainbow text effect */
+        .logo-container span:nth-child(1) { color: #00d9ff; animation-delay: 0.1s; }
+        .logo-container span:nth-child(2) { color: #2af598; animation-delay: 0.2s; }
+        .logo-container span:nth-child(3) { color: #8b5cf6; animation-delay: 0.3s; }
+        .logo-container span:nth-child(4) { color: #22d3ee; animation-delay: 0.4s; }
+        .logo-container span:nth-child(5) { color: #60a5fa; animation-delay: 0.5s; }
+        .logo-container span:nth-child(6) { margin: 0 15px; } /* Space */
+        .logo-container span:nth-child(7) { color: #22d3ee; animation-delay: 0.6s; }
+        .logo-container span:nth-child(8) { color: #8b5cf6; animation-delay: 0.7s; }
+        .logo-container span:nth-child(9) { color: #00d9ff; animation-delay: 0.8s; }
 
-/* RESET */
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-30px); }
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        .hide {
+            animation: open 1s forwards cubic-bezier(0.77, 0, 0.175, 1);
+        }
 
-/* BODY */
+        @keyframes open {
+            to { transform: translateY(-100%); opacity: 0; }
+        }
 
-body{
-font-family:Poppins;
-background:#050b1a;
-color:white;
-overflow-x:hidden;
-}
+        /* Hero Section */
+        #site {
+            opacity: 0;
+            animation: fadein 1.5s forwards;
+            animation-delay: 3s;
+        }
 
-/* ANIMATED BACKGROUND */
+        @keyframes fadein { to { opacity: 1; } }
 
-body::before{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:linear-gradient(45deg,#020617,#071133,#0a1f55,#020617);
-background-size:400% 400%;
-animation:bgmove 18s infinite linear;
-z-index:-2;
-}
+        .hero {
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
 
-@keyframes bgmove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
+        .hero h2 {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, #00d9ff, #60a5fa, #8b5cf6, #2af598);
+            background-size: 300% 300%;
+            animation: gradient-move 5s infinite linear;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(0, 217, 255, 0.2));
+        }
 
-/* PARTICLES */
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-.particle{
-position:fixed;
-width:3px;
-height:3px;
-background:#00d9ff;
-border-radius:50%;
-opacity:.5;
-animation:float 12s linear infinite;
-}
+        .hero p {
+            color: var(--text-dim);
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
 
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-120vh)}
-}
+        .server-ip {
+            background: var(--bg-card);
+            padding: 18px 45px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
 
-/* INTRO SCREEN */
+        .server-ip:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
 
-#intro{
-position:fixed;
-width:100%;
-height:100vh;
-background:#020617;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:999;
-}
+        .server-ip b { color: var(--primary); }
 
-.logo{
-font-family:Orbitron;
-font-size:90px;
-letter-spacing:8px;
-display:flex;
-}
+        .copymsg {
+            font-size: 0.9rem;
+            color: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            margin-bottom: 20px;
+        }
 
-.logo span{
-display:inline-block;
-animation:bounce 1s infinite alternate;
-}
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 100px 10%;
+        }
 
-/* COLORFUL TEXT */
+        .feature-card {
+            padding: 45px 35px;
+            text-align: center;
+        }
 
-.logo span:nth-child(1){color:#00d9ff}
-.logo span:nth-child(2){color:#2af598}
-.logo span:nth-child(3){color:#8b5cf6}
-.logo span:nth-child(4){color:#22d3ee}
-.logo span:nth-child(5){color:#60a5fa}
-.logo span:nth-child(6){margin:0 20px}
-.logo span:nth-child(7){color:#22d3ee}
-.logo span:nth-child(8){color:#8b5cf6}
-.logo span:nth-child(9){color:#00d9ff}
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
 
-@keyframes bounce{
-0%{transform:translateY(0)}
-100%{transform:translateY(-35px)}
-}
-
-/* INTRO EXIT */
-
-.hide{
-animation:open 1.5s forwards;
-}
-
-@keyframes open{
-to{
-transform:translateY(-100%);
-opacity:0;
-}
-}
-
-/* MAIN SITE */
-
-#site{
-opacity:0;
-animation:fadein 2s forwards;
-animation-delay:3s;
-}
-
-@keyframes fadein{
-to{opacity:1}
-}
-
-/* NAVBAR */
-
-nav{
-display:flex;
-justify-content:space-between;
-padding:20px 10%;
-background:rgba(10,20,50,.5);
-backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,.1);
-}
-
-nav h1{
-font-family:Orbitron;
-color:#00d9ff;
-}
-
-nav a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-transition:.3s;
-}
-
-nav a:hover{
-color:#00d9ff;
-}
-
-/* HERO */
-
-.hero{
-height:80vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-
-.hero h2{
-font-size:65px;
-font-family:Orbitron;
-background:linear-gradient(90deg,#00d9ff,#60a5fa,#8b5cf6);
--webkit-background-clip:text;
-color:transparent;
-}
-
-.hero p{
-opacity:.8;
-margin-top:10px;
-font-size:20px;
-}
-
-/* SERVER BOX */
-
-.server{
-margin-top:40px;
-padding:20px 40px;
-background:rgba(255,255,255,.05);
-border-radius:12px;
-border:1px solid rgba(255,255,255,.1);
-transition:.3s;
-cursor:pointer;
-}
-
-.server:hover{
-transform:scale(1.1);
-box-shadow:0 0 30px #00d9ff;
-}
-
-/* COPY TEXT */
-
-.copymsg{
-margin-top:10px;
-font-size:14px;
-color:#00d9ff;
-display:none;
-}
-
-/* BUTTON */
-
-.btn{
-margin-top:30px;
-display:inline-block;
-padding:14px 35px;
-background:#00d9ff;
-color:#020617;
-border-radius:8px;
-font-weight:bold;
-text-decoration:none;
-transition:.3s;
-}
-
-.btn:hover{
-background:white;
-transform:scale(1.1);
-}
-
-/* GAMEMODES */
-
-.gamemodes{
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-padding:80px 10%;
-}
-
-.card{
-background:rgba(255,255,255,.04);
-padding:35px;
-width:250px;
-border-radius:15px;
-border:1px solid rgba(255,255,255,.1);
-transition:.4s;
-}
-
-.card:hover{
-transform:translateY(-12px) scale(1.05);
-box-shadow:0 0 25px #00d9ff;
-}
-
-.card h3{
-font-family:Orbitron;
-margin-bottom:10px;
-color:#00d9ff;
-}
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:25px;
-background:#020617;
-opacity:.7;
-}
-
-</style>
+        .feature-card p {
+            color: var(--text-dim);
+        }
+    </style>
 </head>
-
 <body>
+    <div class="bg-glow"></div>
 
-<!-- INTRO -->
+    <!-- Intro -->
+    <div id="intro">
+        <div class="logo-container">
+            <span>L</span><span>U</span><span>C</span><span>K</span><span>Y</span>
+            <span> </span>
+            <span>S</span><span>M</span><span>P</span>
+        </div>
+    </div>
 
-<div id="intro">
+    <!-- Main Site -->
+    <div id="site">
+        <nav>
+            <h1>LuckySMP</h1>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="store.html">Store</a>
+                <a href="https://discord.gg/ueadhWTNVW" target="_blank">Discord</a>
+            </div>
+        </nav>
 
-<div class="logo">
-<span>L</span>
-<span>U</span>
-<span>C</span>
-<span>K</span>
-<span>Y</span>
-<span> </span>
-<span>S</span>
-<span>M</span>
-<span>P</span>
-</div>
+        <main>
+            <section class="hero">
+                <h2>LUCKY SMP</h2>
+                <p>Experience the next level of Minecraft Survival. Custom economy, weekly events, and a vibrant community await.</p>
+                
+                <div class="server-ip" onclick="copyIP('play.luckysmp.dpdns.org')">
+                    SERVER IP: <b>play.luckysmp.dpdns.org</b>
+                </div>
+                <div class="copymsg" id="copied">Copied to clipboard!</div>
 
-</div>
+                <a class="btn" href="https://discord.gg/ueadhWTNVW" target="_blank">Join Community</a>
+            </section>
 
-<!-- SITE -->
+            <section class="features">
+                <div class="card feature-card">
+                    <h3>Survival</h3>
+                    <p>Classic SMP experience enhanced with custom plugins, a stable economy, and protected land claims for you and your friends.</p>
+                </div>
 
-<div id="site">
+                <div class="card feature-card">
+                    <h3>Community</h3>
+                    <p>Our dedicated staff and friendly player base ensure a toxic-free environment where everyone can have fun.</p>
+                </div>
 
-<nav>
-<h1>LuckySMP</h1>
+                <div class="card feature-card">
+                    <h3>Events</h3>
+                    <p>From PvP tournaments to building competitions, we host regular events with exclusive rewards and bragging rights.</p>
+                </div>
+            </section>
+        </main>
 
-<div>
-<a href="/">Home</a>
-<a href="/store.html">Store</a>
-<a href="https://discord.gg/ueadhWTNVW" target="_blank">Discord</a>
-</div>
-</nav>
+        <footer>
+            <p>&copy; 2026 LuckySMP Minecraft Server. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Not an official Minecraft product. Not approved by or associated with Mojang.</p>
+        </footer>
+    </div>
 
-<section class="hero">
-
-<h2>Lucky SMP</h2>
-
-<p>The Ultimate Minecraft Survival Experience</p>
-
-<div class="server" onclick="copyIP()">
-Server IP: <b>play.luckysmp.dpdns.org</b>
-</div>
-
-<div class="copymsg" id="copied">Copied to clipboard!</div>
-
-<a class="btn" href="https://discord.gg/ueadhWTNVW" target="_blank">Join Discord</a>
-
-</section>
-
-<section class="gamemodes">
-
-<div class="card">
-<h3>Survival</h3>
-<p>Classic survival with economy, land claims and custom features.</p>
-</div>
-
-<div class="card">
-<h3>Events</h3>
-<p>Weekly PvP events, tournaments and amazing rewards.</p>
-</div>
-
-</section>
-
-<footer>
-© 2026 LuckySMP Minecraft Server
-</footer>
-
-</div>
-
-<script>
-
-/* INTRO REMOVE */
-
-setTimeout(()=>{
-document.getElementById("intro").classList.add("hide");
-},2500);
-
-/* COPY IP */
-
-function copyIP(){
-
-navigator.clipboard.writeText("play.luckysmp.dpdns.org");
-
-let msg=document.getElementById("copied");
-msg.style.display="block";
-
-setTimeout(()=>{
-msg.style.display="none";
-},2000);
-
-}
-
-/* PARTICLES */
-
-for(let i=0;i<60;i++){
-
-let p=document.createElement("div");
-p.classList.add("particle");
-
-p.style.left=Math.random()*100+"vw";
-p.style.top=Math.random()*100+"vh";
-p.style.animationDuration=(Math.random()*10+8)+"s";
-
-document.body.appendChild(p);
-
-}
-
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
-```
