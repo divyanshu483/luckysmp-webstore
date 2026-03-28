@@ -10,7 +10,6 @@ function initParticles() {
         p.style.opacity = Math.random() * 0.4;
         p.style.transform = `scale(${Math.random()})`;
         
-        // Add subtle floating animation
         const keyframes = [
             { transform: 'translate(0, 0)' },
             { transform: `translate(${Math.random() * 50 - 25}px, -120vh)` }
@@ -40,18 +39,25 @@ function copyIP(ip) {
     });
 }
 
+// Scroll reveal
+function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    els.forEach(el => observer.observe(el));
+}
+
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
     initParticles();
+    initReveal();
     
-    // Smooth intro removal if it exists
     const intro = document.getElementById("intro");
     if (intro) {
         setTimeout(() => {
             intro.classList.add("hide");
-            setTimeout(() => {
-                intro.style.display = "none";
-            }, 1500);
+            setTimeout(() => { intro.style.display = "none"; }, 1500);
         }, 2500);
     }
 });

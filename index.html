@@ -34,13 +34,12 @@
             text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
         }
 
-        /* Rainbow text effect */
         .logo-container span:nth-child(1) { color: #00d9ff; animation-delay: 0.1s; }
         .logo-container span:nth-child(2) { color: #2af598; animation-delay: 0.2s; }
         .logo-container span:nth-child(3) { color: #8b5cf6; animation-delay: 0.3s; }
         .logo-container span:nth-child(4) { color: #22d3ee; animation-delay: 0.4s; }
         .logo-container span:nth-child(5) { color: #60a5fa; animation-delay: 0.5s; }
-        .logo-container span:nth-child(6) { margin: 0 15px; } /* Space */
+        .logo-container span:nth-child(6) { margin: 0 15px; }
         .logo-container span:nth-child(7) { color: #22d3ee; animation-delay: 0.6s; }
         .logo-container span:nth-child(8) { color: #8b5cf6; animation-delay: 0.7s; }
         .logo-container span:nth-child(9) { color: #00d9ff; animation-delay: 0.8s; }
@@ -146,6 +145,13 @@
             text-align: center;
         }
 
+        .feature-card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.3));
+        }
+
         .feature-card h3 {
             font-family: 'Orbitron', sans-serif;
             margin-bottom: 15px;
@@ -185,27 +191,49 @@
             <section class="hero">
                 <h2>LUCKY SMP</h2>
                 <p>Experience the next level of Minecraft Survival. Custom economy, weekly events, and a vibrant community await.</p>
-                
+
                 <div class="server-ip" onclick="copyIP('play.luckysmp.dpdns.org')">
                     SERVER IP: <b>play.luckysmp.dpdns.org</b>
                 </div>
-                <div class="copymsg" id="copied">Copied to clipboard!</div>
+                <div class="copymsg" id="copied">✓ Copied to clipboard!</div>
 
                 <a class="btn" href="https://discord.gg/ueadhWTNVW" target="_blank">Join Community</a>
+
+                <div class="stats-bar reveal">
+                    <div class="stat-item">
+                        <div class="stat-num">500+</div>
+                        <div class="stat-label">Players</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">24/7</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">1.21</div>
+                        <div class="stat-label">Version</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">0ms</div>
+                        <div class="stat-label">Lag</div>
+                    </div>
+                </div>
             </section>
 
             <section class="features">
-                <div class="card feature-card">
+                <div class="card feature-card reveal">
+                    <span class="icon">⚔️</span>
                     <h3>Survival</h3>
                     <p>Classic SMP experience enhanced with custom plugins, a stable economy, and protected land claims for you and your friends.</p>
                 </div>
 
-                <div class="card feature-card">
+                <div class="card feature-card reveal" style="transition-delay:0.12s">
+                    <span class="icon">🌐</span>
                     <h3>Community</h3>
                     <p>Our dedicated staff and friendly player base ensure a toxic-free environment where everyone can have fun.</p>
                 </div>
 
-                <div class="card feature-card">
+                <div class="card feature-card reveal" style="transition-delay:0.24s">
+                    <span class="icon">🏆</span>
                     <h3>Events</h3>
                     <p>From PvP tournaments to building competitions, we host regular events with exclusive rewards and bragging rights.</p>
                 </div>

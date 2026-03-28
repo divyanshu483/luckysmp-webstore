@@ -15,10 +15,16 @@
         .page-header h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
-            color: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 4px;
+        }
+
+        .page-header p {
+            color: var(--text-dim);
         }
 
         .category-section {
@@ -57,8 +63,7 @@
         .item-card h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: var(--primary);
+            margin-bottom: 8px;
         }
 
         .perks-list {
@@ -79,6 +84,7 @@
         .perks-list li::before {
             content: '✦';
             color: var(--accent);
+            flex-shrink: 0;
         }
 
         .price-tag {
@@ -179,11 +185,12 @@
     </header>
 
     <section class="category-section">
-        <h2 class="category-title">Player Ranks</h2>
+        <h2 class="category-title">🎖️ Player Ranks</h2>
         <div class="store-grid">
             <!-- VIP -->
-            <div class="card item-card">
-                <h3>VIP</h3>
+            <div class="card item-card reveal">
+                <span class="rank-badge badge-vip">VIP</span>
+                <h3 class="rank-vip">VIP</h3>
                 <ul class="perks-list">
                     <li>3x Homes</li>
                     <li>2 Concurrent Auctions</li>
@@ -195,8 +202,9 @@
             </div>
 
             <!-- MVP -->
-            <div class="card item-card">
-                <h3>MVP</h3>
+            <div class="card item-card reveal" style="transition-delay:0.08s">
+                <span class="rank-badge badge-mvp">MVP</span>
+                <h3 class="rank-mvp">MVP</h3>
                 <ul class="perks-list">
                     <li>5x Homes</li>
                     <li>4 Concurrent Auctions</li>
@@ -209,8 +217,9 @@
             </div>
 
             <!-- ELITE -->
-            <div class="card item-card">
-                <h3>ELITE</h3>
+            <div class="card item-card reveal" style="transition-delay:0.16s">
+                <span class="rank-badge badge-elite">ELITE</span>
+                <h3 class="rank-elite">ELITE</h3>
                 <ul class="perks-list">
                     <li>6x Homes</li>
                     <li>5 Concurrent Auctions</li>
@@ -223,8 +232,9 @@
             </div>
 
             <!-- IMMORTAL -->
-            <div class="card item-card">
-                <h3>IMMORTAL</h3>
+            <div class="card item-card reveal" style="transition-delay:0.24s">
+                <span class="rank-badge badge-immortal">IMMORTAL</span>
+                <h3 class="rank-immortal">IMMORTAL</h3>
                 <ul class="perks-list">
                     <li>7x Homes</li>
                     <li>6 Concurrent Auctions</li>
@@ -238,10 +248,10 @@
     </section>
 
     <section class="category-section">
-        <h2 class="category-title">Crate Keys</h2>
+        <h2 class="category-title">🗝️ Crate Keys</h2>
         <div class="store-grid">
-            <div class="card item-card">
-                <h3>Lucky Key</h3>
+            <div class="card item-card reveal">
+                <h3 style="color: var(--accent);">Lucky Key</h3>
                 <ul class="perks-list">
                     <li>Lucky Crate Rewards</li>
                     <li>Random Rare Items</li>
@@ -251,8 +261,8 @@
                 <button class="btn" onclick="openPayment()">Buy Now</button>
             </div>
 
-            <div class="card item-card">
-                <h3>Spawner Key</h3>
+            <div class="card item-card reveal" style="transition-delay:0.1s">
+                <h3 style="color: var(--primary);">Spawner Key</h3>
                 <ul class="perks-list">
                     <li>Chance to win Mob Spawners</li>
                     <li>Rare Survival Blocks</li>
@@ -262,8 +272,8 @@
                 <button class="btn" onclick="openPayment()">Buy Now</button>
             </div>
 
-            <div class="card item-card">
-                <h3>Demon Key</h3>
+            <div class="card item-card reveal" style="transition-delay:0.2s">
+                <h3 style="color: var(--secondary);">Demon Key</h3>
                 <ul class="perks-list">
                     <li>God-tier Loot</li>
                     <li>Exclusive Demon Gear</li>
@@ -306,12 +316,9 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
 
-        // Close on outside click
         window.onclick = function(event) {
             const modal = document.getElementById('paymentModal');
-            if (event.target == modal) {
-                closePayment();
-            }
+            if (event.target == modal) closePayment();
         }
     </script>
 </body>
