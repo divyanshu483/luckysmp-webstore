@@ -3,103 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store | LuckySMP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Store | LuckySMP Premium Ranks</title>
+    <!-- Fonts imported in style.css -->
     <link rel="stylesheet" href="style.css">
     <style>
         .page-header {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 100px 20px 60px;
+            position: relative;
         }
 
         .page-header h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(to right, #00f0ff, #14f195, #a855f7, #00f0ff);
+            background-size: 300% auto;
+            animation: text-shine 6s linear infinite;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 4px;
+            filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.2));
         }
 
         .page-header p {
             color: var(--text-dim);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .category-section {
             padding: 40px 8%;
+            position: relative;
+            z-index: 10;
         }
 
         .category-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 40px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            color: #fff;
         }
 
         .category-title::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: var(--border);
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
         }
 
         .store-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 35px;
         }
 
         .item-card {
             display: flex;
             flex-direction: column;
-            padding: 35px;
+            padding: 40px 30px;
             height: 100%;
+            text-align: center;
         }
 
         .item-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .perks-list {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             flex: 1;
+            text-align: left;
+            padding: 0 10px;
         }
 
         .perks-list li {
-            margin-bottom: 12px;
-            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
             color: var(--text-dim);
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
+            line-height: 1.4;
         }
 
-        .perks-list li::before {
-            content: '✦';
-            color: var(--accent);
+        .perks-list li svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary);
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
         .price-tag {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 900;
             color: #fff;
-            margin-bottom: 20px;
-            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 25px;
+            font-family: 'Outfit', sans-serif;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .price-tag span {
-            font-size: 1rem;
-            color: var(--primary);
+            font-size: 1.2rem;
+            color: var(--text-dim);
             vertical-align: super;
+            font-weight: 600;
+            margin-right: 2px;
         }
+
+        /* Specific Rank Glows */
+        .card-vip { --primary: var(--vip); box-shadow: inset 0 0 20px rgba(20, 241, 149, 0.05); }
+        .card-mvp { --primary: var(--mvp); box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05); }
+        .card-elite { --primary: var(--elite); box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.05); }
+        .card-immortal { --primary: var(--immortal); box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.05); }
+
+        .card-vip:hover { border-color: rgba(20, 241, 149, 0.3); box-shadow: 0 20px 40px rgba(20, 241, 149, 0.15), inset 0 0 30px rgba(20, 241, 149, 0.1); }
+        .card-mvp:hover { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.15), inset 0 0 30px rgba(0, 240, 255, 0.1); }
+        .card-elite:hover { border-color: rgba(168, 85, 247, 0.3); box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15), inset 0 0 30px rgba(168, 85, 247, 0.1); }
+        .card-immortal:hover { border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15), inset 0 0 30px rgba(245, 158, 11, 0.1); }
+
+        .card-vip h3 { color: var(--vip); text-shadow: 0 0 15px rgba(20, 241, 149, 0.3); }
+        .card-mvp h3 { color: var(--mvp); text-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
+        .card-elite h3 { color: var(--elite); text-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+        .card-immortal h3 { color: var(--immortal); text-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+        
+        .card-vip .btn { background: linear-gradient(135deg, var(--vip), #059669); }
+        .card-mvp .btn { background: linear-gradient(135deg, var(--mvp), #0284c7); }
+        .card-elite .btn { background: linear-gradient(135deg, var(--elite), #6d28d9); color: #fff; }
+        .card-immortal .btn { background: linear-gradient(135deg, var(--immortal), #b45309); color: #fff; }
 
         /* QR Popup */
         .modal {
@@ -157,7 +201,7 @@
         }
 
         .modal h2 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Outfit', sans-serif;
             margin-bottom: 10px;
         }
 
@@ -181,106 +225,113 @@
 
     <header class="page-header">
         <h2>Webstore</h2>
-        <p>Support the server and get amazing perks in return.</p>
+        <p>Support the server and unlock exclusive premium perks.</p>
     </header>
 
     <section class="category-section">
-        <h2 class="category-title">🎖️ Player Ranks</h2>
+        <h2 class="category-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: #a855f7;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Player Ranks
+        </h2>
         <div class="store-grid">
             <!-- VIP -->
-            <div class="card item-card reveal">
+            <div class="card item-card card-vip reveal">
                 <span class="rank-badge badge-vip">VIP</span>
                 <h3 class="rank-vip">VIP</h3>
                 <ul class="perks-list">
-                    <li>3x Homes</li>
-                    <li>2 Concurrent Auctions</li>
-                    <li>Access to /craft</li>
-                    <li>Access to /recipe</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 3x Homes</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 2 Concurrent Auctions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /craft</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /recipe</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>20</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()">Buy VIP</button>
             </div>
 
             <!-- MVP -->
-            <div class="card item-card reveal" style="transition-delay:0.08s">
+            <div class="card item-card card-mvp reveal" style="transition-delay:0.1s">
                 <span class="rank-badge badge-mvp">MVP</span>
                 <h3 class="rank-mvp">MVP</h3>
                 <ul class="perks-list">
-                    <li>5x Homes</li>
-                    <li>4 Concurrent Auctions</li>
-                    <li>Access to /craft, /recipe</li>
-                    <li>Access to /disposal, /near</li>
-                    <li>Access to /hat, /feed</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 5x Homes</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 4 Concurrent Auctions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /craft, /recipe</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /disposal</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /hat, /feed</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>30</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()">Buy MVP</button>
             </div>
 
             <!-- ELITE -->
-            <div class="card item-card reveal" style="transition-delay:0.16s">
+            <div class="card item-card card-elite reveal" style="transition-delay:0.2s">
                 <span class="rank-badge badge-elite">ELITE</span>
                 <h3 class="rank-elite">ELITE</h3>
                 <ul class="perks-list">
-                    <li>6x Homes</li>
-                    <li>5 Concurrent Auctions</li>
-                    <li>All MVP Perks</li>
-                    <li>Access to /invsee</li>
-                    <li>Access to /enderchest</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 6x Homes</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 5 Concurrent Auctions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> All MVP Perks</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /invsee</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /enderchest</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>40</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()">Buy Elite</button>
             </div>
 
             <!-- IMMORTAL -->
-            <div class="card item-card reveal" style="transition-delay:0.24s">
+            <div class="card item-card card-immortal reveal" style="transition-delay:0.3s">
                 <span class="rank-badge badge-immortal">IMMORTAL</span>
                 <h3 class="rank-immortal">IMMORTAL</h3>
                 <ul class="perks-list">
-                    <li>7x Homes</li>
-                    <li>6 Concurrent Auctions</li>
-                    <li>All ELITE Perks</li>
-                    <li>Access to /ptime, /pweather</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 7x Homes</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 6 Concurrent Auctions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> All ELITE Perks</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /ptime</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Access to /pweather</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>50</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()">Buy Immortal</button>
             </div>
         </div>
     </section>
 
     <section class="category-section">
-        <h2 class="category-title">🗝️ Crate Keys</h2>
+        <h2 class="category-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: #00f0ff;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            Crate Keys
+        </h2>
         <div class="store-grid">
-            <div class="card item-card reveal">
-                <h3 style="color: var(--accent);">Lucky Key</h3>
+            <div class="card item-card card-vip reveal" style="--primary: #22d3ee;">
+                <h3 style="color: #22d3ee;">Lucky Key</h3>
                 <ul class="perks-list">
-                    <li>Lucky Crate Rewards</li>
-                    <li>Random Rare Items</li>
-                    <li>Economy Boosters</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Lucky Crate Rewards</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Random Rare Items</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Economy Boosters</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>20</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()" style="background: linear-gradient(135deg, #22d3ee, #0284c7);">Buy Now</button>
             </div>
 
-            <div class="card item-card reveal" style="transition-delay:0.1s">
-                <h3 style="color: var(--primary);">Spawner Key</h3>
+            <div class="card item-card card-elite reveal" style="transition-delay:0.1s; --primary: #c084fc;">
+                <h3 style="color: #c084fc;">Spawner Key</h3>
                 <ul class="perks-list">
-                    <li>Chance to win Mob Spawners</li>
-                    <li>Rare Survival Blocks</li>
-                    <li>Bonus Loot</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Win Mob Spawners</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Rare Survival Blocks</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Bonus Loot</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>30</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()" style="background: linear-gradient(135deg, #c084fc, #7e22ce); color: #fff;">Buy Now</button>
             </div>
 
-            <div class="card item-card reveal" style="transition-delay:0.2s">
-                <h3 style="color: var(--secondary);">Demon Key</h3>
+            <div class="card item-card card-immortal reveal" style="transition-delay:0.2s; --primary: #ef4444;">
+                <h3 style="color: #ef4444;">Demon Key</h3>
                 <ul class="perks-list">
-                    <li>God-tier Loot</li>
-                    <li>Exclusive Demon Gear</li>
-                    <li>Highest Reward Tiers</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> God-tier Loot</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Exclusive Demon Gear</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Highest Reward Tiers</li>
                 </ul>
                 <div class="price-tag"><span>₹</span>50</div>
-                <button class="btn" onclick="openPayment()">Buy Now</button>
+                <button class="btn" onclick="openPayment()" style="background: linear-gradient(135deg, #ef4444, #991b1b); color: #fff;">Buy Now</button>
             </div>
         </div>
     </section>
